@@ -1,4 +1,40 @@
+const { compile } = require("sizzle");
+
 window.dom = {
+  create(content) {
+    /**
+     * 用于创建节点
+     */
+    const container = document.createElement("template");
+    container.innerHTML = content.trim();
+    return container.content.firstChild;
+  },
+  after(node, pendNode) {
+    /**
+     * 用于新增弟弟
+     */
+    node.parentNode.insertBefore(pendNode, node.nextSibling);
+  },
+  before(node, pendNode) {
+    /**
+     * 用于新增哥哥
+     */
+    node.parentNode.insertBefore(pendNode, node);
+  },
+  append(parent, child) {
+    /**
+     * 用于新增儿子
+     */
+    parent.appendChild(child);
+  },
+  wrap(child, parent) {
+    /**
+     * 用于新增父亲
+     */
+    dom.before(child, parent);
+    dom.append(parent, child);
+  },
+
   find(selector, scope) {
     /**
      * 返回与指定的选择器组匹配的文档中的元素列表 (使用深度优先的先序遍历文档的节点)。返回的对象是 NodeList

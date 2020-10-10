@@ -1,0 +1,24 @@
+{
+  "name": "wheels",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HugoAtGithub/wheels.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HugoAtGithub/wheels/issues"
+  },
+  "homepage": "https://github.com/HugoAtGithub/wheels#readme",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "sizzle": "^2.3.5"
+  }
+}
