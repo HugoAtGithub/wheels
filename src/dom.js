@@ -34,6 +34,110 @@ window.dom = {
     dom.before(child, parent);
     dom.append(parent, child);
   },
+  remove(node) {
+    /**
+     * 用于删除节点
+     */
+    return node.parentNode.removeChild(node);
+  },
+  empty(parent) {
+    /**
+     * 用于删除后代
+     */
+    const array = [];
+    while (parent.firstChild) {
+      array.push(parent.removeChild(parent.firstChild));
+    }
+    return array;
+  },
+  attr(node, name, value) {
+    /**
+     * 用于读写属性
+     */
+    if (arguments.length === 3) {
+      node.setAttribute(name, value);
+    } else if (arguments.length === 2) {
+      return node.getAttribute(name);
+    }
+  },
+  text(node, content) {
+    /**
+     * 用于读写文本内容
+     */
+    if (arguments.length === 2) {
+      if ("innerText" in node) {
+        node.innerText = content;
+      } else {
+        node.textContent = content;
+      }
+    } else if (arguments.length === 1) {
+      if ("innerText" in node) {
+        return node.innerText;
+      } else {
+        return node.textContent;
+      }
+    }
+  },
+  html(node, content) {
+    /**
+     * 用于读写HTML内容
+     */
+    if (arguments.length === 2) {
+      node.innerHTML = content;
+    } else if (arguments.length === 1) {
+      return node.innerHTML;
+    }
+  },
+  style(node, name, value) {
+    /**
+     * 用于修改 style
+     */
+    if (arguments.length === 3) {
+      node.style[name] = value;
+    } else if (arguments.length === 2) {
+      if (typeof name === "string") {
+        // 用于获取属性
+        return node.style[name];
+      } else if (name instanceof Object) {
+        const obj = name;
+        for (let key in obj) {
+          node.style[key] = obj[key];
+        }
+      }
+    }
+  },
+  class: {
+    add(node, className) {
+      /**
+       * 用于添加class
+       */
+      node.classList.add(className);
+    },
+    remove(node, className) {
+      /**
+       * 用于删除class
+       */
+      node.classList.remove(className);
+    },
+    has(node, className) {
+      /**
+       * 用于判断元素是否存在指定的className
+       */
+      return node.classList.contains(className);
+    },
+  },
+  on(node, eventName, fn) {
+    /**
+     * 用于添加事件监听
+     */
+    node.addEventListener(eventName, fn)
+  },
+  off(node, eventName, fn) {
+    /**
+     * 用于删除事件监听
+     */
+    node.removeEventListener(eventName, fn)
+  },
 
   find(selector, scope) {
     /**
