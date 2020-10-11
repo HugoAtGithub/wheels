@@ -88,24 +88,6 @@ window.dom = {
       return node.innerHTML;
     }
   },
-  style(node, name, value) {
-    /**
-     * 用于修改 style
-     */
-    if (arguments.length === 3) {
-      node.style[name] = value;
-    } else if (arguments.length === 2) {
-      if (typeof name === "string") {
-        // 用于获取属性
-        return node.style[name];
-      } else if (name instanceof Object) {
-        const obj = name;
-        for (let key in obj) {
-          node.style[key] = obj[key];
-        }
-      }
-    }
-  },
   class: {
     add(node, className) {
       /**
@@ -130,15 +112,15 @@ window.dom = {
     /**
      * 用于添加事件监听
      */
-    node.addEventListener(eventName, fn)
+    node.addEventListener(eventName, fn);
   },
   off(node, eventName, fn) {
     /**
      * 用于删除事件监听
      */
-    node.removeEventListener(eventName, fn)
+    node.removeEventListener(eventName, fn);
   },
-
+  // 查
   find(selector, scope) {
     /**
      * 返回与指定的选择器组匹配的文档中的元素列表 (使用深度优先的先序遍历文档的节点)。返回的对象是 NodeList
@@ -147,6 +129,27 @@ window.dom = {
      */
     return (scope || document).querySelectorAll(selector);
   },
+  parent(node) {
+    return node.parentNode;
+  },
+  children(node) {
+    return node.children;
+  },
+  siblings(node) {
+    return Array.from(node.parentNode.children).filter((n) => n !== node);
+  },
+  next(node) {
+    while ((node = node.nextSibling) && node.nodeType === 3) {}
+    return node;
+  },
+  previous(node) {
+    while ((node = node.previousSibling) && node.nodeType === 3) {}
+    return node;
+  },
+  index(node) {
+    return Array.from(node.parentNode.children).indexOf(node);
+  },
+
   style(node, name, value) {
     /**
      * 设置或获取元素属性

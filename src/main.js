@@ -41,8 +41,21 @@ const fn = () => {
 dom.on(d1, 'click', fn)
 dom.off(d1, 'click', fn)
 
+console.log(dom.parent(d1))
+const s2 = dom.find('#s2')[0]
+console.log(s2)
+console.log(dom.siblings(s2))
+console.log(dom.next(s2))
+console.log(dom.previous(s2))
+
 const div = dom.find("#test>.red")[0]; // 获取对应的元素
 dom.style(div, "color", "green"); // 设置 div.style.color
 
 const divList = dom.find(".red"); // 获取多个 div.red 元素
 dom.each(divList, (n) => console.log(n)); // 遍历 divList 里的所有元素
+
+
+const t = dom.find('#travel')[0]
+dom.each(dom.children(t), (n)=> dom.style(n, 'color', 'red'))
+
+console.log(dom.index(s3))
